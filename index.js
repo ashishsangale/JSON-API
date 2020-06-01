@@ -1,5 +1,8 @@
 var express = require('express');
     app = express();
+    todos = require('./routes/todos');
+
+app.use('/api/todos', todos)
 
 app.get('/', function(req, res){
     res.send("TESTTTT")
