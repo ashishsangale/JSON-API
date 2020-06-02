@@ -3,28 +3,18 @@ var express = require('express');
     router = express.Router();
     bodyParser = require('body-parser');
 var db = require('../models');
+var refactor = require('../refactor/todo');
 
 
 router.use(bodyParser.json());
-router.get('/', function(req, res){
-    db.Todo.find()
-    .then(function(todos){
-        res.json(todos)
-    })
-    .catch(function(err){
-        res.send(err)
-    })
-});
 
-router.post('/', function(req, res){
-    console.log(req.body)
-    db.Todo.create(req.body)
-    .then(function(newTodo){
-        res.json(newTodo)
-    })
-    .catch(function(err){
-        res.send(err)
-    })
-});
+router.route('/')
+ .get(refactor.getTodos)
+ .post(refactor.createTodos)
+
+router.route('/:todoId')
+ .get(refactor.getTodo)
+ .put(refactor.updateTodo)
+ .delete(refactor.deleteTodo)
 
 module.exports = router;
