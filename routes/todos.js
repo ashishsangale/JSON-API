@@ -7,6 +7,7 @@ var refactor = require('../refactor/todo');
 
 
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended:true}));
 
 router.route('/')
  .get(refactor.getTodos)
