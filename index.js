@@ -5,11 +5,13 @@ var express = require('express');
     bodyParser = require('body-parser');
     
 app.use('/api/todos', todos)
-
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/views'));
+app.use(express.static('public'));
 
 app.get('/', function(req, res){
-    res.send("TESTTTT")
+    res.sendFile('index.html');
 });
 
 
